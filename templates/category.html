@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-light mb-30">
+                <a class="text-" href="{% url 'core:collections' %}">Category</a>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
+
+    <!-- Categories Start -->
+    <div class="container-fluid pt-5">
+        <h1 class="text-center">Store categories</h1>
+        <div class="row px-xl-5 pb-3">
+            {% for item in category %}
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
+                        {% if item.trending %}
+                        <label style="font-size: 16px;" class="float-end badge bg-danger trending_tag">TRENDING</label>
+                        {% endif %}
+                        <a href="{% url 'core:collectionsview' item.slug %}" class="cat-img position-relative overflow-hidden mb-3">
+                            <img class="img-fluid" src="{{ item.image.url}}" alt="" style="height: 100px">
+                        </a>
+                        <h5 class="font-weight-semi-bold m-0 text-center">{{ item.title }}</h5>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- Categories End -->
+{% endblock content %}

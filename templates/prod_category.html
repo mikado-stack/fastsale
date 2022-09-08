@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    .text{
+        background-color:darkgray;
+        padding-left: 0px;
+        color: floralwhite;
+        font-size: 25px;
+        text-decoration: none;
+    }
+</style>
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="text">
+                <a  href="{% url 'core:collections' %}">category</a> >
+                <a  href="{% url 'core:collectionsview'  category.slug %}">{{ category.title }}</a>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
+ <!-- Products Start -->
+ <div class="container-fluid pt-5 pb-3">
+  <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Featured Products</span></h2>
+  <div class="row px-xl-5">
+    {% for item in products %}
+      <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+          <div class="product-item bg-light mb-4">
+              <div class="product-img position-relative overflow-hidden">
+                <img src="{{ item.image.url }}" class="card-img-top" style="height: 170px;">
+                  <div class="product-action">
+                      <a class="btn btn-outline-dark btn-square" href="{{ item.get_add_to_cart_url }}"><i class="fa fa-shopping-cart"></i></a>
+
+                      <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                  </div>
+              </div>
+              <div class="text-center py-4">
+                  <a class="h3 text-decoration-none text-truncate" href="{% url 'core:productview' cate_slug=item.category.slug prod_slug=item.slug %}"><span class="badge badge-pill {{ item.get_label_display }}-color">{{ item.title }}</span></a>
+                  <div class="d-flex align-items-center justify-content-center mt-2">
+                      <h5>${{ item.discount_price }}</h5><h6 class="text-muted ml-2"><del>${{ item.price }}</del></h6>
+                  </div>
+  
+              </div>
+          </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<!-- Products End -->
+{% endblock %}
