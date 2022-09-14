@@ -20,8 +20,7 @@ app_name = 'core'
 
 urlpatterns = [
     path('home', HomeView.as_view(), name='home'),
-    
-    path('login/', views.loginPage, name="login"), 
+     
  	path('logout/', LogoutView.as_view(next_page='collections'), name='logout'),
     
     path('', views.collections, name='collections'),
@@ -30,6 +29,9 @@ urlpatterns = [
     path('collections/<str:cate_slug>/<str:prod_slug>', views.productview, name='productview'),
     
     path('search', views.search, name="search"),
+    path('contact', views.contact, name="contact"),
+    path('profile/', views.profile, name="profile"),
+    path('dashboard/', views.dashboard, name="dashboard"),
     
     path('product/<slug>/', ItemDetailView.as_view(), name='product'),
     

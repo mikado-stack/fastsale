@@ -1,0 +1,807 @@
+{% extends "base1.html" %}
+{% load static %}
+
+{% block content %}
+<body>
+    <div class="page-wrapper">
+        <div class="top-notice bg-primary text-white">
+            <div class="container text-center">
+                <h5 class="d-inline-block">Get Up to <b>40% OFF</b> New-Season Styles</h5>
+                <a href="category.html" class="category">MEN</a>
+                <a href="category.html" class="category ml-2 mr-3">WOMEN</a>
+                <small>* Limited time only.</small>
+                <button title="Close (Esc)" type="button" class="mfp-close">×</button>
+            </div>
+            <!-- End .container -->
+        </div>
+        <!-- End .top-notice -->
+
+        <main class="main">
+            <div class="container">
+                <nav aria-label="breadcrumb" class="breadcrumb-nav">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'core:collections' %}"><i class="icon-home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'core:collectionsview'  products.category.slug %}">{{ products.category.title }}</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'core:productview' products.category.slug products.slug %}">{{ products.title }}</a></li>
+                    </ol>
+                </nav>
+
+                <div class="product-single-container product-single-default">
+                    <div class="cart-message d-none">
+                        <strong class="single-cart-notice">{{ products.get_category_display }}</strong>
+                        <span>has been added to your cart.</span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-5 col-md-6 product-single-gallery">
+                            <div class="product-slider-container">
+                                <div class="label-group">
+                                    <div class="product-label label-sale">HOT</div>
+                                    {% if products.quantity %}
+                                    <div class="product-label label-hot">
+                                        IN STOCK
+                                    </div>
+                                    {% else %}
+                                    <div class="product-label label-sale">
+                                        OUT OF STOCK
+                                    </div>
+                                    {% endif %}
+                                    
+                                </div>
+
+                                <div class="product-single-carousel owl-carousel owl-theme show-nav-hover">
+                                    <div class="product-item">
+                                        <img class="product-single-image" src="{{ products.image.url }}" data-zoom-image="assets/images/products/zoom/product-1-big.jpg" width="468" height="468" alt="product" />
+                                    </div>
+                                    <div class="product-item">
+                                        <img class="product-single-image" src="{{ products.image2.url }}" data-zoom-image="assets/images/products/zoom/product-2-big.jpg" width="468" height="468" alt="product" />
+                                    </div>
+                                    <div class="product-item">
+                                        <img class="product-single-image" src="{{ products.image3.url }}" data-zoom-image="assets/images/products/zoom/product-3-big.jpg" width="468" height="468" alt="product" />
+                                    </div>
+                                    <div class="product-item">
+                                        <img class="product-single-image" src="{{ products.image.url }}" data-zoom-image="assets/images/products/zoom/product-4-big.jpg" width="468" height="468" alt="product" />
+                                    </div>
+                                    <div class="product-item">
+                                        <img class="product-single-image" src="{{ products.image3.url }}" data-zoom-image="assets/images/products/zoom/product-5-big.jpg" width="468" height="468" alt="product" />
+                                    </div>
+                                </div>
+                                <!-- End .product-single-carousel -->
+                            </div>
+
+                            <div class="prod-thumbnail owl-dots">
+                                <div class="owl-dot">
+                                    <img src="{{ products.image.url }}" width="110" height="110" alt="product-thumbnail" />
+                                </div>
+                                <div class="owl-dot">
+                                    <img src="{{ products.image2.url }}" width="110" height="110" alt="product-thumbnail" />
+                                </div>
+                                <div class="owl-dot">
+                                    <img src="{{ products.image3.url }}" width="110" height="110" alt="product-thumbnail" />
+                                </div>
+                                <div class="owl-dot">
+                                    <img src="{{ products.image.url }}" width="110" height="110" alt="product-thumbnail" />
+                                </div>
+                                <div class="owl-dot">
+                                    <img src="{{ products.image3.url }}" width="110" height="110" alt="product-thumbnail" />
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End .product-single-gallery -->
+
+                        <div class="col-lg-7 col-md-6 product-single-details">
+                            <h1 class="product-title">{{ products.title }}</h1>
+
+                            <div class="product-nav">
+                                <div class="product-prev">
+                                    <a href="#">
+                                        <span class="product-link"></span>
+
+                                        <span class="product-popup">
+											<span class="box-content">
+												<img alt="product" width="150" height="150"
+													src="{{ products.image.url }}"
+													style="padding-top: 0px;">
+
+												<span>{{ products.price }}</span>
+                                        </span>
+                                        </span>
+                                    </a>
+                                </div>
+
+                                <div class="product-next">
+                                    <a href="#">
+                                        <span class="product-link"></span>
+
+                                        <span class="product-popup">
+											<span class="box-content">
+												<img alt="product" width="150" height="150"
+													src="{{ products.image3.url }}"
+													style="padding-top: 0px;">
+
+												<span>{{ products.title }}</span>
+                                        </span>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="ratings-container">
+                                <div class="product-ratings">
+                                    <span class="ratings" style="width:60%"></span>
+                                    <!-- End .ratings -->
+                                    <span class="tooltiptext tooltip-top"></span>
+                                </div>
+                                <!-- End .product-ratings -->
+
+                                <a href="#" class="rating-link">( 6 Reviews )</a>
+                            </div>
+                            <!-- End .ratings-container -->
+
+                            <hr class="short-divider">
+
+                            <div class="price-box">
+                                <span class="old-price">${{ products.discount_price }}</span>
+                                <span class="new-price">${{ products.price }}</span>
+                            </div>
+                            <!-- End .price-box -->
+
+                            <div class="product-desc">
+                                <p>
+                                    {{ products.description }}
+                                </p>
+                            </div>
+                            <!-- End .product-desc -->
+                            {% if products.trending %}
+                            <ul class="single-info-list">
+
+                                <li>
+                                   <label style="font-size: 16px;" class="float-end badge bg-warning trending_tag">TRENDING</label>
+                                </li>
+                            </ul>
+                            {% endif %}
+
+                            <div class="product-action">
+                                
+                                <!-- End .product-single-qty -->
+`                               <div class="text-center">
+                                    <a href="{{ products.get_add_to_cart_url }}" class="btn btn-dark  mr-1" >Add to
+                                    Cart</a>
+                                    <a href="{{ products.get_remove_from_cart_url }}" class="btn btn-danger  mr-1" >Delete from cart
+                                        </a>
+
+                                </div>
+                                
+
+                                
+                            </div>
+                            <!-- End .product-action -->
+
+                            <hr class="divider mb-0 mt-0">
+
+                            <div class="product-single-share mb-3">
+                                <label class="sr-only">Share:</label>
+
+                                <div class="social-icons mr-2">
+                                    <a href="#" class="social-icon social-facebook icon-facebook" target="_blank" title="Facebook"></a>
+                                    <a href="#" class="social-icon social-twitter icon-twitter" target="_blank" title="Twitter"></a>
+                                    <a href="#" class="social-icon social-linkedin fab fa-linkedin-in" target="_blank" title="Linkedin"></a>
+                                    <a href="#" class="social-icon social-gplus fab fa-google-plus-g" target="_blank" title="Google +"></a>
+                                    <a href="#" class="social-icon social-mail icon-mail-alt" target="_blank" title="Mail"></a>
+                                </div>
+                                <!-- End .social-icons -->
+
+                            
+                            </div>
+                            <!-- End .product single-share -->
+                        </div>
+                        <!-- End .product-single-details -->
+                    </div>
+                    <!-- End .row -->
+                </div>
+                <!-- End .product-single-container -->
+
+                <div class="product-single-tabs">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link" id="product-tab-tags" data-toggle="tab" href="#product-tags-content" role="tab" aria-controls="product-tags-content" aria-selected="false">Additional
+								Information</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" id="product-tab-reviews" data-toggle="tab" href="#product-reviews-content" role="tab" aria-controls="product-reviews-content" aria-selected="false">Reviews (1)</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="product-desc-content" role="tabpanel" aria-labelledby="product-tab-desc">
+                            <div class="product-desc-content">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, nostrud ipsum consectetur sed do, quis nostrud exercitation ullamco laboris
+                                    nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat.</p>
+                                <ul>
+                                    <li>Any Product types that You want - Simple, Configurable
+                                    </li>
+                                    <li>Downloadable/Digital Products, Virtual Products
+                                    </li>
+                                    <li>Inventory Management with Backordered items
+                                    </li>
+                                </ul>
+                                <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                            </div>
+                            <!-- End .product-desc-content -->
+                        </div>
+                        <!-- End .tab-pane -->
+
+                        <div class="tab-pane fade" id="product-tags-content" role="tabpanel" aria-labelledby="product-tab-tags">
+                            <table class="table table-striped mt-2">
+                                <tbody>
+                                    <tr>
+                                        <th>Weight</th>
+                                        <td>23 kg</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Dimensions</th>
+                                        <td>12 × 24 × 35 cm</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Color</th>
+                                        <td>Black, Green, Indigo</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Size</th>
+                                        <td>Large, Medium, Small</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- End .tab-pane -->
+
+                        <div class="tab-pane fade" id="product-reviews-content" role="tabpanel" aria-labelledby="product-tab-reviews">
+                            <div class="product-reviews-content">
+                                <h3 class="reviews-title">1 review for Men Black Sports Shoes</h3>
+
+                                <div class="comment-list">
+                                    <div class="comments">
+                                        <figure class="img-thumbnail">
+                                            <img src="assets/images/blog/author.jpg" alt="author" width="80" height="80">
+                                        </figure>
+
+                                        <div class="comment-block">
+                                            <div class="comment-header">
+                                                <div class="comment-arrow"></div>
+
+                                                <div class="ratings-container float-sm-right">
+                                                    <div class="product-ratings">
+                                                        <span class="ratings" style="width:60%"></span>
+                                                        <!-- End .ratings -->
+                                                        <span class="tooltiptext tooltip-top"></span>
+                                                    </div>
+                                                    <!-- End .product-ratings -->
+                                                </div>
+
+                                                <span class="comment-by">
+													<strong>Joe Doe</strong> – April 12, 2018
+												</span>
+                                            </div>
+
+                                            <div class="comment-content">
+                                                <p>Excellent.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="divider"></div>
+
+                                <div class="add-product-review">
+                                    <h3 class="review-title">Add a review</h3>
+
+                                    <form action="#" class="comment-form m-0">
+                                        <div class="rating-form">
+                                            <label for="rating">Your rating <span class="required">*</span></label>
+                                            <span class="rating-stars">
+												<a class="star-1" href="#">1</a>
+												<a class="star-2" href="#">2</a>
+												<a class="star-3" href="#">3</a>
+												<a class="star-4" href="#">4</a>
+												<a class="star-5" href="#">5</a>
+											</span>
+
+                                            <select name="rating" id="rating" required="" style="display: none;">
+												<option value="">Rate…</option>
+												<option value="5">Perfect</option>
+												<option value="4">Good</option>
+												<option value="3">Average</option>
+												<option value="2">Not that bad</option>
+												<option value="1">Very poor</option>
+											</select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Your review <span class="required">*</span></label>
+                                            <textarea cols="5" rows="6" class="form-control form-control-sm"></textarea>
+                                        </div>
+                                        <!-- End .form-group -->
+
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-xl-12">
+                                                <div class="form-group">
+                                                    <label>Name <span class="required">*</span></label>
+                                                    <input type="text" class="form-control form-control-sm" required>
+                                                </div>
+                                                <!-- End .form-group -->
+                                            </div>
+
+                                            <div class="col-md-6 col-xl-12">
+                                                <div class="form-group">
+                                                    <label>Email <span class="required">*</span></label>
+                                                    <input type="text" class="form-control form-control-sm" required>
+                                                </div>
+                                                <!-- End .form-group -->
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="save-name" />
+                                                    <label class="custom-control-label mb-0" for="save-name">Save my
+														name, email, and website in this browser for the next time I
+														comment.</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <input type="submit" class="btn btn-primary" value="Submit">
+                                    </form>
+                                </div>
+                                <!-- End .add-product-review -->
+                            </div>
+                            <!-- End .product-reviews-content -->
+                        </div>
+                        <!-- End .tab-pane -->
+                    </div>
+                    <!-- End .tab-content -->
+                </div>
+                <!-- End .product-single-tabs -->
+
+                <div class="products-section pt-0">
+                    <h2 class="section-title">Related Products</h2>
+
+                    <div class="products-slider owl-carousel owl-theme dots-top dots-small">
+                        <div class="product-default">
+                            <figure>
+                                <a href="product.html">
+                                    <img src="{% static 'assets/images/products/product-1.jpg' %}" width="280" height="280" alt="product">
+                                    <img src="{% static 'assets/images/products/product-1-2.jpg' %}" width="280" height="280" alt="product">
+                                </a>
+                                <div class="label-group">
+                                    <div class="product-label label-hot">HOT</div>
+                                    <div class="product-label label-sale">-20%</div>
+                                </div>
+                            </figure>
+                            <div class="product-details">
+                                <div class="category-list">
+                                    <a href="category.html" class="product-category">Category</a>
+                                </div>
+                                <h3 class="product-title">
+                                    <a href="product.html">Ultimate 3D Bluetooth Speaker</a>
+                                </h3>
+                                <div class="ratings-container">
+                                    <div class="product-ratings">
+                                        <span class="ratings" style="width:80%"></span>
+                                        <!-- End .ratings -->
+                                        <span class="tooltiptext tooltip-top"></span>
+                                    </div>
+                                    <!-- End .product-ratings -->
+                                </div>
+                                <!-- End .product-container -->
+                                <div class="price-box">
+                                    <del class="old-price">$59.00</del>
+                                    <span class="product-price">$49.00</span>
+                                </div>
+                                <!-- End .price-box -->
+                                <div class="product-action">
+                                    <a href="wishlist.html" title="Wishlist" class="btn-icon-wish"><i
+											class="icon-heart"></i></a>
+                                    <a href="product.html" class="btn-icon btn-add-cart"><i
+											class="fa fa-arrow-right"></i><span>SELECT
+											OPTIONS</span></a>
+                                    <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View"><i
+											class="fas fa-external-link-alt"></i></a>
+                                </div>
+                            </div>
+                            <!-- End .product-details -->
+                        </div>
+
+                        <div class="product-default">
+                            <figure>
+                                <a href="product.html">
+                                    <img src="{% static 'assets/images/products/product-3.jpg' %}" width="280" height="280" alt="product">
+                                    <img src="{% static 'assets/images/products/product-3-2.jpg' %}" width="280" height="280" alt="product">
+                                </a>
+                                <div class="label-group">
+                                    <div class="product-label label-hot">HOT</div>
+                                    <div class="product-label label-sale">-20%</div>
+                                </div>
+                            </figure>
+                            <div class="product-details">
+                                <div class="category-list">
+                                    <a href="category.html" class="product-category">Category</a>
+                                </div>
+                                <h3 class="product-title">
+                                    <a href="product.html">Circled Ultimate 3D Speaker</a>
+                                </h3>
+                                <div class="ratings-container">
+                                    <div class="product-ratings">
+                                        <span class="ratings" style="width:80%"></span>
+                                        <!-- End .ratings -->
+                                        <span class="tooltiptext tooltip-top"></span>
+                                    </div>
+                                    <!-- End .product-ratings -->
+                                </div>
+                                <!-- End .product-container -->
+                                <div class="price-box">
+                                    <del class="old-price">$59.00</del>
+                                    <span class="product-price">$49.00</span>
+                                </div>
+                                <!-- End .price-box -->
+                                <div class="product-action">
+                                    <a href="wishlist.html" title="Wishlist" class="btn-icon-wish"><i
+											class="icon-heart"></i></a>
+                                    <a href="product.html" class="btn-icon btn-add-cart"><i
+											class="fa fa-arrow-right"></i><span>SELECT
+											OPTIONS</span></a>
+                                    <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View"><i
+											class="fas fa-external-link-alt"></i></a>
+                                </div>
+                            </div>
+                            <!-- End .product-details -->
+                        </div>
+
+                        <div class="product-default">
+                            <figure>
+                                <a href="product.html">
+                                    <img src="{% static 'assets/images/products/product-7.jpg' %}" width="280" height="280" alt="product">
+                                    <img src="{% static 'assets/images/products/product-7-2.jpg' %}" width="280" height="280" alt="product">
+                                </a>
+                                <div class="label-group">
+                                    <div class="product-label label-hot">HOT</div>
+                                    <div class="product-label label-sale">-20%</div>
+                                </div>
+                            </figure>
+                            <div class="product-details">
+                                <div class="category-list">
+                                    <a href="category.html" class="product-category">Category</a>
+                                </div>
+                                <h3 class="product-title">
+                                    <a href="product.html">Brown-Black Men Casual Glasses</a>
+                                </h3>
+                                <div class="ratings-container">
+                                    <div class="product-ratings">
+                                        <span class="ratings" style="width:80%"></span>
+                                        <!-- End .ratings -->
+                                        <span class="tooltiptext tooltip-top"></span>
+                                    </div>
+                                    <!-- End .product-ratings -->
+                                </div>
+                                <!-- End .product-container -->
+                                <div class="price-box">
+                                    <del class="old-price">$59.00</del>
+                                    <span class="product-price">$49.00</span>
+                                </div>
+                                <!-- End .price-box -->
+                                <div class="product-action">
+                                    <a href="wishlist.html" title="Wishlist" class="btn-icon-wish"><i
+											class="icon-heart"></i></a>
+                                    <a href="product.html" class="btn-icon btn-add-cart"><i
+											class="fa fa-arrow-right"></i><span>SELECT
+											OPTIONS</span></a>
+                                    <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View"><i
+											class="fas fa-external-link-alt"></i></a>
+                                </div>
+                            </div>
+                            <!-- End .product-details -->
+                        </div>
+
+                        <div class="product-default">
+                            <figure>
+                                <a href="product.html">
+                                    <img src="{% static 'assets/images/products/product-6.jpg' %}" width="280" height="280" alt="product">
+                                    <img src="{% static 'assets/images/products/product-6-2.jpg' %}" width="280" height="280" alt="product">
+                                </a>
+                                <div class="label-group">
+                                    <div class="product-label label-hot">HOT</div>
+                                    <div class="product-label label-sale">-20%</div>
+                                </div>
+                            </figure>
+                            <div class="product-details">
+                                <div class="category-list">
+                                    <a href="category.html" class="product-category">Category</a>
+                                </div>
+                                <h3 class="product-title">
+                                    <a href="product.html">Men Black Gentle Belt</a>
+                                </h3>
+                                <div class="ratings-container">
+                                    <div class="product-ratings">
+                                        <span class="ratings" style="width:80%"></span>
+                                        <!-- End .ratings -->
+                                        <span class="tooltiptext tooltip-top"></span>
+                                    </div>
+                                    <!-- End .product-ratings -->
+                                </div>
+                                <!-- End .product-container -->
+                                <div class="price-box">
+                                    <del class="old-price">$59.00</del>
+                                    <span class="product-price">$49.00</span>
+                                </div>
+                                <!-- End .price-box -->
+                                <div class="product-action">
+                                    <a href="wishlist.html" title="Wishlist" class="btn-icon-wish"><i
+											class="icon-heart"></i></a>
+                                    <a href="product.html" class="btn-icon btn-add-cart"><i
+											class="fa fa-arrow-right"></i><span>SELECT
+											OPTIONS</span></a>
+                                    <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View"><i
+											class="fas fa-external-link-alt"></i></a>
+                                </div>
+                            </div>
+                            <!-- End .product-details -->
+                        </div>
+
+                        <div class="product-default">
+                            <figure>
+                                <a href="product.html">
+                                    <img src="{% static 'assets/images/products/product-4.jpg' %}" width="280" height="280" alt="product">
+                                    <img src="{% static 'assets/images/products/product-4-2.jpg' %}" width="280" height="280" alt="product">
+                                </a>
+                                <div class="label-group">
+                                    <div class="product-label label-hot">HOT</div>
+                                    <div class="product-label label-sale">-20%</div>
+                                </div>
+                            </figure>
+                            <div class="product-details">
+                                <div class="category-list">
+                                    <a href="category.html" class="product-category">Category</a>
+                                </div>
+                                <h3 class="product-title">
+                                    <a href="product.html">Blue Backpack for the Young - S</a>
+                                </h3>
+                                <div class="ratings-container">
+                                    <div class="product-ratings">
+                                        <span class="ratings" style="width:80%"></span>
+                                        <!-- End .ratings -->
+                                        <span class="tooltiptext tooltip-top"></span>
+                                    </div>
+                                    <!-- End .product-ratings -->
+                                </div>
+                                <!-- End .product-container -->
+                                <div class="price-box">
+                                    <del class="old-price">$59.00</del>
+                                    <span class="product-price">$49.00</span>
+                                </div>
+                                <!-- End .price-box -->
+                                <div class="product-action">
+                                    <a href="wishlist.html" title="Wishlist" class="btn-icon-wish"><i
+											class="icon-heart"></i></a>
+                                    <a href="product.html" class="btn-icon btn-add-cart"><i
+											class="fa fa-arrow-right"></i><span>SELECT
+											OPTIONS</span></a>
+                                    <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View"><i
+											class="fas fa-external-link-alt"></i></a>
+                                </div>
+                            </div>
+                            <!-- End .product-details -->
+                        </div>
+                    </div>
+                    <!-- End .products-slider -->
+                </div>
+                <!-- End .products-section -->
+
+                <hr class="mt-0 m-b-5" />
+                <!-- End .row -->
+            </div>
+            <!-- End .container -->
+        </main>
+        <!-- End .main -->
+    </div>
+    <!-- End .page-wrapper -->
+
+    <div class="mobile-menu-overlay"></div>
+    <!-- End .mobil-menu-overlay -->
+
+    <div class="mobile-menu-container">
+        <div class="mobile-menu-wrapper">
+            <span class="mobile-menu-close"><i class="fa fa-times"></i></span>
+            <nav class="mobile-nav">
+                <ul class="mobile-menu">
+                    <li><a href="demo4.html">Home</a></li>
+                    <li>
+                        <a href="category.html">Categories</a>
+                        <ul>
+                            <li><a href="category.html">Full Width Banner</a></li>
+                            <li><a href="category-banner-boxed-slider.html">Boxed Slider Banner</a></li>
+                            <li><a href="category-banner-boxed-image.html">Boxed Image Banner</a></li>
+                            <li><a href="https://www.portotheme.com/html/porto_ecommerce/category-sidebar-left.html">Left Sidebar</a></li>
+                            <li><a href="category-sidebar-right.html">Right Sidebar</a></li>
+                            <li><a href="category-off-canvas.html">Off Canvas Filter</a></li>
+                            <li><a href="category-horizontal-filter1.html">Horizontal Filter 1</a></li>
+                            <li><a href="category-horizontal-filter2.html">Horizontal Filter 2</a></li>
+                            <li><a href="#">List Types</a></li>
+                            <li><a href="category-infinite-scroll.html">Ajax Infinite Scroll<span
+										class="tip tip-new">New</span></a></li>
+                            <li><a href="category.html">3 Columns Products</a></li>
+                            <li><a href="category-4col.html">4 Columns Products</a></li>
+                            <li><a href="category-5col.html">5 Columns Products</a></li>
+                            <li><a href="category-6col.html">6 Columns Products</a></li>
+                            <li><a href="category-7col.html">7 Columns Products</a></li>
+                            <li><a href="category-8col.html">8 Columns Products</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="product.html">Products</a>
+                        <ul>
+                            <li>
+                                <a href="#" class="nolink">PRODUCT PAGES</a>
+                                <ul>
+                                    <li><a href="product.html">SIMPLE PRODUCT</a></li>
+                                    <li><a href="product-variable.html">VARIABLE PRODUCT</a></li>
+                                    <li><a href="product.html">SALE PRODUCT</a></li>
+                                    <li><a href="product.html">FEATURED & ON SALE</a></li>
+                                    <li><a href="product-sticky-info.html">WIDTH CUSTOM TAB</a></li>
+                                    <li><a href="product-sidebar-left.html">WITH LEFT SIDEBAR</a></li>
+                                    <li><a href="product-sidebar-right.html">WITH RIGHT SIDEBAR</a></li>
+                                    <li><a href="product-addcart-sticky.html">ADD CART STICKY</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#" class="nolink">PRODUCT LAYOUTS</a>
+                                <ul>
+                                    <li><a href="product-extended-layout.html">EXTENDED LAYOUT</a></li>
+                                    <li><a href="product-grid-layout.html">GRID IMAGE</a></li>
+                                    <li><a href="product-full-width.html">FULL WIDTH LAYOUT</a></li>
+                                    <li><a href="product-sticky-info.html">STICKY INFO</a></li>
+                                    <li><a href="product-sticky-both.html">LEFT & RIGHT STICKY</a></li>
+                                    <li><a href="product-transparent-image.html">TRANSPARENT IMAGE</a></li>
+                                    <li><a href="product-center-vertical.html">CENTER VERTICAL</a></li>
+                                    <li><a href="#">BUILD YOUR OWN</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Pages<span class="tip tip-hot">Hot!</span></a>
+                        <ul>
+                            <li>
+                                <a href="wishlist.html">Wishlist</a>
+                            </li>
+                            <li>
+                                <a href="cart.html">Shopping Cart</a>
+                            </li>
+                            <li>
+                                <a href="checkout.html">Checkout</a>
+                            </li>
+                            <li>
+                                <a href="dashboard.html">Dashboard</a>
+                            </li>
+                            <li>
+                                <a href="login.html">Login</a>
+                            </li>
+                            <li>
+                                <a href="forgot-password.html">Forgot Password</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="#">Elements</a>
+                        <ul class="custom-scrollbar">
+                            <li><a href="element-accordions.html">Accordion</a></li>
+                            <li><a href="element-alerts.html">Alerts</a></li>
+                            <li><a href="element-animations.html">Animations</a></li>
+                            <li><a href="element-banners.html">Banners</a></li>
+                            <li><a href="element-buttons.html">Buttons</a></li>
+                            <li><a href="element-call-to-action.html">Call to Action</a></li>
+                            <li><a href="element-countdown.html">Count Down</a></li>
+                            <li><a href="element-counters.html">Counters</a></li>
+                            <li><a href="element-headings.html">Headings</a></li>
+                            <li><a href="element-icons.html">Icons</a></li>
+                            <li><a href="element-info-box.html">Info box</a></li>
+                            <li><a href="element-posts.html">Posts</a></li>
+                            <li><a href="element-products.html">Products</a></li>
+                            <li><a href="element-product-categories.html">Product Categories</a></li>
+                            <li><a href="element-tabs.html">Tabs</a></li>
+                            <li><a href="element-testimonial.html">Testimonials</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="mobile-menu mt-2 mb-2">
+                    <li class="border-0">
+                        <a href="#">
+							Special Offer!
+						</a>
+                    </li>
+                    <li class="border-0">
+                        <a href="#" target="_blank">
+							Buy Porto!
+							<span class="tip tip-hot">Hot</span>
+						</a>
+                    </li>
+                </ul>
+
+                <ul class="mobile-menu">
+                    <li><a href="login.html">My Account</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="wishlist.html">My Wishlist</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                    <li><a href="login.html" class="login-link">Log In</a></li>
+                </ul>
+            </nav>
+            <!-- End .mobile-nav -->
+
+            <form class="search-wrapper mb-2" action="#">
+                <input type="text" class="form-control mb-0" placeholder="Search..." required />
+                <button class="btn icon-search text-white bg-transparent p-0" type="submit"></button>
+            </form>
+
+            <div class="social-icons">
+                <a href="#" class="social-icon social-facebook icon-facebook" target="_blank">
+                </a>
+                <a href="#" class="social-icon social-twitter icon-twitter" target="_blank">
+                </a>
+                <a href="#" class="social-icon social-instagram icon-instagram" target="_blank">
+                </a>
+            </div>
+        </div>
+        <!-- End .mobile-menu-wrapper -->
+    </div>
+    <!-- End .mobile-menu-container -->
+
+    <div class="sticky-navbar">
+        <div class="sticky-info">
+            <a href="demo4.html">
+                <i class="icon-home"></i>Home
+            </a>
+        </div>
+        <div class="sticky-info">
+            <a href="category.html" class="">
+                <i class="icon-bars"></i>Categories
+            </a>
+        </div>
+        <div class="sticky-info">
+            <a href="wishlist.html" class="">
+                <i class="icon-wishlist-2"></i>Wishlist
+            </a>
+        </div>
+        <div class="sticky-info">
+            <a href="login.html" class="">
+                <i class="icon-user-2"></i>Account
+            </a>
+        </div>
+        <div class="sticky-info">
+            <a href="cart.html" class="">
+                <i class="icon-shopping-cart position-relative">
+					<span class="cart-count badge-circle">3</span>
+				</i>Cart
+            </a>
+        </div>
+    </div>
+
+    <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
+
+    <!-- Plugins JS File -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/plugins.min.js"></script>
+
+    <!-- Main JS File -->
+    <script src="assets/js/main.min.js"></script>
+</body>
+
+
+<!-- Mirrored from portotheme.com/html/porto_ecommerce/product.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 09 Sep 2022 10:10:20 GMT -->
+</html>
+{% endblock %}

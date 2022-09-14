@@ -16,7 +16,7 @@
     <div class="row px-xl-5">
         <div class="col-12">
             <nav class="text">
-                <a  href="{% url 'core:collections' %}">category</a> >
+                <a  href="{% url 'core:collections' %}">category</a> 
                 <a  href="{% url 'core:collectionsview'  category.slug %}">{{ category.title }}</a>
             </nav>
         </div>
@@ -29,7 +29,7 @@
   <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Featured Products</span></h2>
   <div class="row px-xl-5">
     {% for item in products %}
-      <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+      <div class="col-lg-2 col-md-4 col-sm-6 pb-1">
           <div class="product-item bg-light mb-4">
               <div class="product-img position-relative overflow-hidden">
                 <img src="{{ item.image.url }}" class="card-img-top" style="height: 170px;">

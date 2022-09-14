@@ -203,3 +203,13 @@ def userprofile_receiver(sender, instance, created, *args, **kwargs):
 
 
 post_save.connect(userprofile_receiver, sender=settings.AUTH_USER_MODEL)
+
+class Contact(models.Model):
+    name= models.CharField(max_length=200)
+    email = models.EmailField()
+    subject = models.CharField(max_length=100)
+    body = models.TextField(max_length=100)
+    comment_date = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return f"{self.name}({self.subject})"

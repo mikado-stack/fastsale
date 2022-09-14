@@ -14,7 +14,7 @@ from django.views.generic import ListView, DetailView, View
 from django.contrib.auth import authenticate, login, logout
 
 from .forms import CheckoutForm, CouponForm, RefundForm, PaymentForm
-from .models import Item, OrderItem, Order, Address, Payment, Coupon, Refund, UserProfile, Category
+from .models import Item, OrderItem, Order, Address, Payment, Coupon, Refund, UserProfile, Category, Contact
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -217,9 +217,9 @@ class CheckoutView(View):
                 payment_option = form.cleaned_data.get('payment_option')
 
                 if payment_option == 'S':
-                    return redirect('core:payment', payment_option='stripe (payment with credit/debit card)')
-                elif payment_option == 'B':
-                    return redirect('core:bankTransfer', payment_option='Bank Transfer')
+                    return redirect('core:payment', payment_option='stripe')
+                elif payment_option == 'P':
+                    return redirect('core:payment', payment_option='paypal')
                 else:
                     messages.warning(
                         self.request, "Invalid payment option selected")
@@ -380,7 +380,7 @@ class HomeView(ListView):
 def collections(request):
     category = Category.objects.filter(status=0)
     context = {'category': category}
-    return render(request, 'category.html', context )
+    return render(request, 'home1.html', context )
 
 
 def collectionsview(request, slug):
@@ -388,7 +388,7 @@ def collectionsview(request, slug):
         products = Item.objects.filter(category__slug=slug)
         category = Category.objects.filter(slug=slug).first()
         context ={'products': products, 'category':category}
-        return render(request, 'prod_category.html', context)
+        return render(request, 'prod_category1.html', context)
     else:
         messages.warning(request, "no such category found")
         return redirect ('core:collection')
@@ -407,20 +407,53 @@ def productview(request, cate_slug, prod_slug):
     else:
         messages.error(request, "No such category found")
         return redirect('core:collections')
-    return render(request, "product.html", context)
+    return render(request, "product1.html", context)
 
 def search(request):
     if request.method =="POST":
         searched =request.POST['searched']
         if searched:
-            product = Item.objects.filter(title__icontains=searched)
+            products = Item.objects.filter(title__icontains=searched)
             messages.success(request, 'Search successful')
-            return render(request, 'search.html', {'searched':searched,'product':product})
+            return render(request, 'search.html', {'searched':searched,'products':products })
     
         else:
             messages.info(request, 'No information to show')
             return render(request, 'search.html', {})
-        
+
+
+def contact(request):
+    if request.method =="POST":
+        contact = Contact()
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        body = request.POST.get('body')
+        contact.name=name
+        contact.email=email
+        contact.subject=subject
+        contact.body=body
+        contact.save()
+        messages.success(request, 'message recieved successfully, you will be contacted via your email')
+        return redirect('core:collections')
+    return render(request, 'contact1.html')
+
+
+def profile(request):
+    return render(request, 'profile.html')
+
+def dashboard(request):
+        if request.user.is_authenticated:
+            orders = request.user.order_set.all()
+
+            total_orders = orders.count()
+            print('ORDERS:', orders)
+
+            context = {'orders':orders, 'total_orders':total_orders}
+        else:
+            return redirect('account_login')
+        return render(request, 'dashbaord.html', context)
+            
 
 
 class OrderSummaryView(LoginRequiredMixin, View):

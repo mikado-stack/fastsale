@@ -1,0 +1,62 @@
+{%  extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<br><br>
+{% if request.user.is_authenticated %}
+	<div class="row">
+	<div class="col-md-3">
+		<div class="">
+			<a class="btn btn-success" href="{% url 'core:collections' %}"> &#8592; Back to Home</a>
+			<hr>
+			<h3 style="text-align: center">Profile Pic</h3>
+			<hr>
+			{% if request.user.customer.profile_pic %}
+			<img class="brand-logo" src="{{request.user.profile_pic.url}}" >
+			{% else %}
+			<img class="profile-pic" src="{% static 'win/img/defaultimg.png' %}" >
+			{% endif %}
+		
+		</div>
+	</div>
+	<div class="col-md-9">
+		{% for obj in orders %}
+			<div class="card card-body">
+				<div class="text-centteer">
+					<h5 class="inputs"> Username: {{ obj.user}}</h5><br>
+					<h5 class="inputs">Name: </h5><br>
+					<h5 class="inputs"> Email: </h5><br>
+					<h5 class="inputs"> Date joined: </h5><br>
+					<h5 class="inputs"> Phone: </h5><br>
+					
+						<h5 class="inputs">Numbers of completed Orders: <strong class="odz"></strong></h5><br>
+					{% if obj.ordered %}
+					<h5 class="inputs">Status of my Order: <strong class="odz">Completed</strong> </h5><br>
+					{% endif %}
+						
+				
+						<h5 class="inputs">Date ordered:</h5> <strong>{{obj.ordere}}</strong><br>
+			
+						<h5 class="inputs">Numbers of pending Orders: <strong class="odr"> No pending orders</strong></h5><br>
+					
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+
+	</div><br>
+	<div class="text-center">
+	<a class="btn btn-primary" href=""> Edit Profile</a>
+	</div>
+	{% else %}
+	<div class='text-centter'>
+		<h5 class="text-center"> You are required to login to view Your profile</h5>
+	</div>
+	
+	<div class="text-center">
+		<a class="btn btn-success" href="{% url 'account_login' %}">Login</a>
+		</div>
+
+{% endif %}
+
+{% endblock %}

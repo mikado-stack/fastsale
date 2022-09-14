@@ -1,45 +1,56 @@
-{% extends "base.html" %}
+{% extends "base1.html" %}
 {% load static %}
 
 {% block content %}
-<!-- Search Start -->
-<div class="container-fluid pt-5">
-    <div class="text-center mb-4">
-        <h2 class="section-title px-5"><span class="px-2">Search Results</span></h2>
-    </div>
-    <div class="row px-xl-5 pb-3">
-        {% if product %}
+<div class="row">
+    {% for item in products %}
+        <div class="col-6 col-sm-4 col-md-3 col-xl-2">
+            <div class="product-default">
+                <figure>
+                    <a href="{% url 'core:productview' cate_slug=item.category.slug prod_slug=item.slug %}">
+                        <img src="{{ item.image.url }}" width="180" height="180" alt="product" />
+                        <img src="{{ item.image.url }}" width="180" height="180" alt="product" />
+                    </a>
 
-        {% for item in product %}
-        <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div class="product-item bg-light mb-4">
-                <div class="product-img position-relative overflow-hidden">
-                  <img src="{{ item.image.url }}" class="card-img-top" style="height: 170px;">
+                    <div class="label-group">
+                        <div class="product-label label-sale">-20%</div>
+                    </div>
+                </figure>
+
+                <div class="product-details">
+                    <div class="category-wrap">
+                        <div class="category-list">
+                            <a href="category.html" class="product-category">Product Name</a>
+                        </div>
+                    </div>
+
+                    <h3 class="product-title"> <a href="product.html">{{ item.title }}</a> </h3>
+
+                    <div class="ratings-container">
+                        <div class="product-ratings">
+                            <span class="ratings" style="width:100%"></span>
+                            <!-- End .ratings -->
+                            <span class="tooltiptext tooltip-top"></span>
+                        </div>
+                        <!-- End .product-ratings -->
+                    </div>
+                    <!-- End .product-container -->
+
+                    <div class="price-box">
+                        <span class="old -price">${{ item.price }}</span>
+                        $ <del><span class="product-price">{{ item.discount_price }}</span></del>
+                    </div>
+                    <!-- End .price-box -->
                     <div class="product-action">
-                        <a class="btn btn-outline-dark btn-square" href="{{ item.get_add_to_cart_url }}"><i class="fa fa-shopping-cart"></i></a>
-  
-                        <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                        <a href="{{ item.get_add_to_cart_url }}" class="btn-icon btn btn-outline-dark product-type-simple"><i
+                                class="icon-shopping-cart"></i><span>ADD TO CART</span></a>
                     </div>
                 </div>
-                <div class="text-center py-4">
-                    <a class="h3 text-decoration-none text-truncate" href="{% url 'core:productview' cate_slug=item.category.slug prod_slug=item.slug %}"><span class="badge badge-pill {{ item.get_label_display }}-color">{{ item.title }}</span></a>
-                    <div class="d-flex align-items-center justify-content-center mt-2">
-                        <h5>${{ item.discount_price }}</h5><h6 class="text-muted ml-2"><del>${{ item.price }}</del></h6>
-                    </div>
-    
-                </div>
+                <!-- End .product-details -->
             </div>
-        </div>
-        {% endfor %}
         
-        {% else %}
-        <div class="text-center mb-4">
-            <h6 class="section-title px-5"><span class="px-2">No Products available</span></h6>
         </div>
-        {% endif %}
-    
-    </div>
-</div>
-<!-- Search End -->
-  
+    {% endfor %}
+    <!-- End .col-sm-4 -->
+</div>  
 {% endblock content %}
