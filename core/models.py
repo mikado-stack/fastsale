@@ -156,6 +156,7 @@ class Address(models.Model):
                              on_delete=models.CASCADE)
     street_address = models.CharField(max_length=100)
     apartment_address = models.CharField(max_length=100)
+    contact_number =models.CharField(max_length=14)
     country = CountryField(multiple=False)
     zip = models.CharField(max_length=100)
     address_type = models.CharField(max_length=1, choices=ADDRESS_CHOICES)
@@ -212,4 +213,4 @@ class Contact(models.Model):
     comment_date = models.DateTimeField(auto_now=True)
     
     def __str__(self):
-        return f"{self.name}({self.subject})"
+        return self.name

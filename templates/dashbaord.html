@@ -162,7 +162,6 @@
 												<th class="order-id">ORDER ID</th>
 												<th class="order-date">ORDERED DATE</th>
 												<th class="order-status">TRANS-STATUS</th>
-												<th class="order-price">TOTAL</th>
 												<th class="order-action">Delivery Status</th>
                                                 <th class="order-action">Payment Status</th>
 											</tr>  
@@ -183,7 +182,6 @@
                                                 {% else %}
                                                 <th class="order-status">Failed</th>
                                                 {% endif %}
-                                                <th class="order-price">TOTAL</th>
                                                 {% if order.being_delivered %}
                                                 <th class="order-id">Delivered</th>
                                                 {% else %}

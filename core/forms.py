@@ -5,13 +5,14 @@ from django_countries.widgets import CountrySelectWidget
 
 PAYMENT_CHOICES = (
     ('S', 'Stripe (payment with credit/debit card)'),
-    ('B', 'Bank_Transfer')
+    ('P', 'Bank_Transfer')
 )
 
 
 class CheckoutForm(forms.Form):
     shipping_address = forms.CharField(required=False)
     shipping_address2 = forms.CharField(required=False)
+    shipping_tel = forms.CharField( max_length=14, required=False)
     shipping_country = CountryField(blank_label='(select country)').formfield(
         required=False,
         widget=CountrySelectWidget(attrs={

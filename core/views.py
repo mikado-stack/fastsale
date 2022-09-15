@@ -122,6 +122,8 @@ class CheckoutView(View):
                         'shipping_address')
                     shipping_address2 = form.cleaned_data.get(
                         'shipping_address2')
+                    shipping_tel = form.cleaned_data.get(
+                        'shipping_tel')
                     shipping_country = form.cleaned_data.get(
                         'shipping_country')
                     shipping_zip = form.cleaned_data.get('shipping_zip')
@@ -131,6 +133,7 @@ class CheckoutView(View):
                             user=self.request.user,
                             street_address=shipping_address1,
                             apartment_address=shipping_address2,
+                            contact_number = shipping_tel,
                             country=shipping_country,
                             zip=shipping_zip,
                             address_type='S'
@@ -212,7 +215,6 @@ class CheckoutView(View):
                     else:
                         messages.info(
                             self.request, "Please fill in the required billing address fields")
-                        return redirect('core:checkout')
 
                 payment_option = form.cleaned_data.get('payment_option')
 
@@ -227,9 +229,6 @@ class CheckoutView(View):
         except ObjectDoesNotExist:
             messages.warning(self.request, "You do not have an active order")
             return redirect("core:order-summary")
-
-def BankTransfer(request):
-    return render(request, "core:home")
 
 
 class PaymentView(View):

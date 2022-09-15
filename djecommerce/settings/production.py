@@ -12,14 +12,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT': '3306'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
-STRIPE_PUBLIC_KEY = config('STRIPE_LIVE_PUBLIC_KEY')
-STRIPE_SECRET_KEY = config('STRIPE_LIVE_SECRET_KEY')
+STRIPE_PUBLIC_KEY = 'pk_live_51LdCIsLc7dX2nRon6GHUTaoSxnYjW21h6npty7YO5PaU54DghZScl6NhdvOP98DAO9Q5VQhNawNYPqOIikw5STcm00xMqNDkK5'
+STRIPE_SECRET_KEY = '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'
