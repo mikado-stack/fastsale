@@ -62,13 +62,11 @@
                               
                               
                               <li><a href="cart.html">Cart</a></li>
-                              {% if request.user.is_authenticated %}
-                                <li><a href="{% url 'account_logout' %}" class="login-link">
-                                Logout</a></li>
-                              {% else %}  
-                                <li><a href="{% url 'account_login' %}" class="login-link">
-                                Login</a></li>
-                                {% endif %}
+                            {% if request.user.is_authenticated %}
+                                <li><a href="{% url 'account_logout' %}">Logout</a></li>
+                            {% else %}
+                                <li><a href="{% url 'account_login' %}">Login</a></li>
+                            {% endif %}
 
                           </ul>
                       </div>
@@ -125,7 +123,7 @@
                   </div>
                   <!-- End .header-contact -->
   
-                  <a href="{% url 'account_login' %}" class="header-icon header-icon-user"><i class="icon-user-2"></i></a>
+                  <a href="{% url 'core:dashboard' %}" class="header-icon header-icon-user"><i class="icon-user-2"></i></a>
   
                   <a href="{% url 'account_login' %}" class="header-icon"><i class="icon-wishlist-2"></i></a>
   

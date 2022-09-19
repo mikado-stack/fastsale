@@ -1,4 +1,5 @@
 import os
+import django_heroku
 from decouple import config
 from djecommerce.jazzmin import JAZZMIN_SETTINGS
 BASE_DIR = os.path.dirname(os.path.dirname(
@@ -82,6 +83,8 @@ LOGIN_REDIRECT_URL = '/'
 # CRISPY FORMS
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+django_heroku.settings(locals())
 
 
 

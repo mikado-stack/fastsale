@@ -13,8 +13,10 @@ from django.utils import timezone
 from django.views.generic import ListView, DetailView, View
 from django.contrib.auth import authenticate, login, logout
 
+from .models import CommentForm
+
 from .forms import CheckoutForm, CouponForm, RefundForm, PaymentForm
-from .models import Item, OrderItem, Order, Address, Payment, Coupon, Refund, UserProfile, Category, Contact
+from .models import Item, OrderItem, Order, Address, Payment, Coupon, Refund, UserProfile, Category, Contact, Comment
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -398,7 +400,6 @@ def productview(request, cate_slug, prod_slug):
         if(Item.objects.filter(slug=prod_slug, status=0)):
             products = Item.objects.filter(slug=prod_slug, status=0).first
             context = {'products':products}
-            
         else:
             messages.error(request, "No such product found")
             return redirect('core:collections')
@@ -407,6 +408,20 @@ def productview(request, cate_slug, prod_slug):
         messages.error(request, "No such category found")
         return redirect('core:collections')
     return render(request, "product1.html", context)
+
+def comment(request):
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            data = Comment()
+            data.subject = form.cleaned_data['subject']
+            data.comment = form.cleaned_data['comment']
+            data.ip = request.Meta.get('REMOTE_ADDR')
+            data.product_id=id
+            current_user = request
+            
+        
+        return redirect('collections')
 
 def search(request):
     if request.method =="POST":

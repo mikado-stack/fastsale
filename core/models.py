@@ -1,3 +1,4 @@
+from dataclasses import field
 from tkinter import CASCADE
 from django.db.models.signals import post_save
 from django.conf import settings
@@ -6,6 +7,8 @@ from django.db.models import Sum
 from django.shortcuts import reverse
 from django_countries.fields import CountryField
 from django.contrib.auth.models import User
+from django.forms import ModelForm
+
 
 
 
@@ -214,3 +217,27 @@ class Contact(models.Model):
     
     def __str__(self):
         return self.name
+    
+class Comment(models.Model):
+    STATUS = (
+        ('New', 'New'),
+        ('True', 'True'),
+        ('False', 'false'),
+    )
+    product = models.ForeignKey(Item, models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    subject = models.CharField(max_length=50, blank=True)
+    comment = models.TextField(max_length=250, blank=True)
+    rate = models.IntegerField(default=1)
+    ip = models.CharField(max_length=20, blank=True)
+    status = models.CharField(max_length=10, choices=STATUS,default='New')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return str(self.subject)
+    
+class CommentForm(ModelForm):
+    class Meta:
+        models =  Comment
+        fields = ['subject', 'comment', 'rate']

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, Item, OrderItem, Order, Payment, Coupon, Refund, Address, UserProfile, Contact
+from .models import Category, Item, OrderItem, Order, Payment, Coupon, Refund, Address, UserProfile, Contact, Comment
 
 
 def make_refund_accepted(modeladmin, request, queryset):
@@ -65,3 +65,4 @@ admin.site.register(Address, AddressAdmin)
 admin.site.register(UserProfile)
 admin.site.register(Category)
 admin.site.register(Contact)
+admin.site.register(Comment)

@@ -29,6 +29,7 @@ urlpatterns = [
     path('collections/<str:cate_slug>/<str:prod_slug>', views.productview, name='productview'),
     
     path('search', views.search, name="search"),
+    path('comment', views.comment, name="comment"),
     path('contact', views.contact, name="contact"),
     path('profile/', views.profile, name="profile"),
     path('dashboard/', views.dashboard, name="dashboard"),
