@@ -88,5 +88,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 django_heroku.settings(locals())
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 
